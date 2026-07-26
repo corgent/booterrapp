@@ -205,6 +205,6 @@ resource "google_vpc_access_connector" "serverless_connector" {
   region        = var.region
   network       = google_compute_network.opencog_vpc.name
   ip_cidr_range = var.serverless_connector_cidr
-  min_instances = var.environment == "production" ? 2 : 2
+  min_instances = var.environment == "production" ? 2 : 1
   max_instances = var.environment == "production" ? 10 : 3
 }

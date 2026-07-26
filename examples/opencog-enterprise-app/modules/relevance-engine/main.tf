@@ -39,9 +39,12 @@ resource "google_bigquery_dataset" "relevance_analytics" {
     user_by_email = var.bigquery_owner_email
   }
 
-  access {
-    role           = "READER"
-    group_by_email = var.bigquery_reader_group
+  dynamic "access" {
+    for_each = var.bigquery_reader_group != "" ? [1] : []
+    content {
+      role           = "READER"
+      group_by_email = var.bigquery_reader_group
+    }
   }
 
   labels = {
